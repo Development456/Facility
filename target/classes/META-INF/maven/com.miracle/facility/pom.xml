@@ -89,6 +89,18 @@
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
+		
+		<!-- keep on sending the matrix to actuator -->
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+		<!-- implement the circuit breaker pattern-->
+		<dependency>
+    		<groupId>io.github.resilience4j</groupId>
+    		<artifactId>resilience4j-spring-boot2</artifactId>
+		</dependency>
 
 
 		<dependency>
