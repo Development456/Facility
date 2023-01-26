@@ -3,6 +3,7 @@ D:\Facility\src\main\java\com\miracle\facility\controller\FacilityController.jav
 D:\Facility\src\main\java\com\miracle\facility\FacilityApplication.java
 D:\Facility\src\main\java\com\miracle\facility\entity\Facility.java
 D:\Facility\src\main\java\com\miracle\facility\exception\ErrorDetails.java
+D:\Facility\src\main\java\com\miracle\facility\config\ConfigurationDetails.java
 D:\Facility\src\main\java\com\miracle\facility\micrometer\MicrometerConfiguration.java
 D:\Facility\src\main\java\com\miracle\facility\exception\GlobalExceptionHandler.java
 D:\Facility\src\main\java\com\miracle\facility\repository\FacilityRepository.java
