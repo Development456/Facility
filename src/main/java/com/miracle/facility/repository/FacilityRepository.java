@@ -1,3 +1,7 @@
+/*******
+* Copyright (C) 2023 Claims Application-Miracle Software Systems Inc
+* All Rights Reserved.
+*******/
 package com.miracle.facility.repository;
 
 import java.util.List;
