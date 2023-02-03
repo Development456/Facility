@@ -8,5 +8,15 @@
     "name": "management.security.enabled",
     "type": "java.lang.String",
     "description": "A description for 'management.security.enabled'"
+  },
+  {
+    "name": "azure.application-insights.instrumentation-key",
+    "type": "java.lang.String",
+    "description": "A description for 'azure.application-insights.instrumentation-key'"
+  },
+  {
+    "name": "spring.main.allow-circular-references",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.main.allow-circular-references'"
   }
 ]}
