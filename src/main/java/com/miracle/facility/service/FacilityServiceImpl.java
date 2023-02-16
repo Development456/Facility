@@ -34,6 +34,43 @@ public class FacilityServiceImpl implements FacilityService {
 	@Autowired
 	MongoOperations mongoOperations;
 	
+	
+	// total facility count API
+	@Override
+	public int countOfFacility() {
+		List<Facility> facility = facilityRepository.findAll();
+		return facility.size();
+	}
+	
+	
+	
+//	//year
+//	//filter function for top cards
+//	@Override
+//	public ResponseEntity<List<Facility>> getFilteredCards(String year, String facility, String customer){
+//				
+//		Query query = new Query();
+//		
+//		List<Criteria> criteria = new ArrayList<>();
+//		
+//		if(year != null) {
+//			criteria.add(Criteria.where("facility_id").is(facility.getFacilityId()));
+//		}
+//		if(facility != null) {
+//			criteria.add(Criteria.where("address_line_1").is(facility.getAddressLine1()));
+//		}
+//		if(customer != null) {
+//			criteria.add(Criteria.where("address_line_2").is(facility.getAddressLine2()));
+//		}
+//		query.addCriteria(new Criteria().andOperator(criteria.toArray(new Criteria[criteria.size()])));//this is working fine
+//		
+//		
+//		
+//		List<Facility> filteredVals = mongoOperations.find(query, Facility.class);
+//		
+//		return new ResponseEntity<List<Facility>>(filteredVals, new HttpHeaders(), HttpStatus.OK);
+//	}
+	
 	//get facility filter
 	@Override
 	public ResponseEntity<List<Facility>> getAllFacilityFilter(Facility facility, int page, int size, String sort){
@@ -199,4 +236,5 @@ public class FacilityServiceImpl implements FacilityService {
 	public List<Facility> getFacilityByCategory(String facilityCategory){
 		return facilityRepository.getFacilityByCategory(facilityCategory);
 	}
+
 }

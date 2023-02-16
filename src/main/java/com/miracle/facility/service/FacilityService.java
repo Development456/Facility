@@ -12,6 +12,8 @@ import com.miracle.facility.entity.Facility;
 
 public interface FacilityService {
 	
+	
+	
 		//get by filter
 		public ResponseEntity<List<Facility>> getAllFacilityFilter(Facility facility, int page, int size, String sort);
 		
@@ -52,4 +54,6 @@ public interface FacilityService {
 		
 		//get list by category
 		public List<Facility> getFacilityByCategory(String category);
+		
+		int countOfFacility();
 }
