@@ -41,6 +41,29 @@ public class FacilityController {
 	@Autowired
 	private FacilityServiceImpl facilityServiceImpl;
 	
+	//filter for top chart 
+	@Timed(
+			value = "facility.getAll",
+			histogram = true,
+			percentiles = {0.95, 0.99},
+			extraTags = {"version", "1.0"}
+			)
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	@ApiOperation(value = "Returns the count of Facility records", notes = "JSON Supported", response = Facility.class)
+	@ApiResponses({ @ApiResponse(code = 200, message = "success", response = Facility.class),
+			@ApiResponse(code = 400, message = "bad-request", response = ErrorDetails.class),
+			@ApiResponse(code = 401, message = "Unauthorized", response = ErrorDetails.class),
+			@ApiResponse(code = 403, message = "Facility service requires authentication - please check username and password", response = ErrorDetails.class),
+			@ApiResponse(code = 404, message = "Data not found", response = ErrorDetails.class),
+			@ApiResponse(code = 405, message = "Method not allowed", response = ErrorDetails.class),
+			@ApiResponse(code = 500, message = "Internal server error", response = ErrorDetails.class) })
+	@GetMapping("/facility/count")
+	public int countOfFacility(){
+		
+		return facilityServiceImpl.countOfFacility();
+	}
+	
 	
 	// http://localhost:8200/filter?page=1&size=4&sort=claimId
 	@Timed(
