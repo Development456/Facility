@@ -4,8 +4,10 @@
 *******/
 package com.miracle.facility.controller;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,28 +44,15 @@ public class FacilityController {
 	@Autowired
 	private FacilityServiceImpl facilityServiceImpl;
 	
-	//filter for top chart 
-	@Timed(
-			value = "facility.getAll",
-			histogram = true,
-			percentiles = {0.95, 0.99},
-			extraTags = {"version", "1.0"}
-			)
-	@ResponseBody
-	@ResponseStatus(HttpStatus.OK)
-	@ApiOperation(value = "Returns the count of Facility records", notes = "JSON Supported", response = Facility.class)
-	@ApiResponses({ @ApiResponse(code = 200, message = "success", response = Facility.class),
-			@ApiResponse(code = 400, message = "bad-request", response = ErrorDetails.class),
-			@ApiResponse(code = 401, message = "Unauthorized", response = ErrorDetails.class),
-			@ApiResponse(code = 403, message = "Facility service requires authentication - please check username and password", response = ErrorDetails.class),
-			@ApiResponse(code = 404, message = "Data not found", response = ErrorDetails.class),
-			@ApiResponse(code = 405, message = "Method not allowed", response = ErrorDetails.class),
-			@ApiResponse(code = 500, message = "Internal server error", response = ErrorDetails.class) })
-	@GetMapping("/facility/count")
-	public int countOfFacility(){
+	
+	
+	//get all facility name from facilityIDs
+	@PostMapping("/facilitynames")
+	public List<String> getFacilityNameFromId(@RequestBody List<String> listOfHashSet){
 		
-		return facilityServiceImpl.countOfFacility();
+		return facilityServiceImpl.getFacilityById(listOfHashSet);
 	}
+	//write a map 
 	
 	
 	// http://localhost:8200/filter?page=1&size=4&sort=claimId

@@ -24,7 +24,7 @@ public interface FacilityService {
 		public List<Facility> getById(String facilityId);
 		
 		
-		// post a a new Facility
+		// post a new Facility
 		public Facility addNewFacility(Facility facility) throws Exception; 
 		
 		public Facility updateFacility(String facilityId, Facility facility);

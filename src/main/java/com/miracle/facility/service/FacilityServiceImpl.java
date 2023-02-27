@@ -18,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.miracle.facility.entity.Facility;
 import com.miracle.facility.repository.FacilityRepository;
@@ -35,6 +36,44 @@ public class FacilityServiceImpl implements FacilityService {
 	MongoOperations mongoOperations;
 	
 	
+	//get list of facility for given year&&facility
+//	public List<String> getFacilityByYear(String year,String facility){
+//		Query query = new Query();
+//		
+//		List<Criteria> criteria = new ArrayList<>();
+//		
+//		String yrL = String.format("%s-01-01",year);
+//		String yrG = String.format("%s-12-31",year);
+//		if(year !=null) {
+//			criteria.add(Criteria.where("create_date").gt(yrL).lt(yrG));
+//		}
+//		if(facility != null) {
+//			criteria.add(Criteria.where("facility_id").is(facility));
+//		}
+//		query.addCriteria(new Criteria().andOperator(criteria.toArray(new Criteria[criteria.size()])));
+//		List<Facility> filteredVals = mongoOperations.find(query, Facility.class);
+//		List<String> finalList = new ArrayList<String>();
+//		for(Facility f:filteredVals) {
+//			finalList.add(f.getFacilityName());
+//		}
+//		return finalList;
+//		
+//	}
+	//this will return all the list of unique facilities
+	public List<String> getFacilityById(List<String> listOfHashSet){
+		Query query = new Query();
+		List<Criteria> criteria = new ArrayList<>();
+		for(String s: listOfHashSet) {
+			criteria.add(Criteria.where("facility_id").is(s));
+		}
+		query.addCriteria(new Criteria().andOperator(criteria.toArray(new Criteria[criteria.size()])));
+		List<Facility> filteredVals = mongoOperations.find(query, Facility.class);
+		List<String> finalList = new ArrayList<>();
+		for(Facility f:filteredVals ) {
+			finalList.add(f.getFacilityName());
+		}
+		return finalList;
+	}
 	// total facility count API
 	@Override
 	public int countOfFacility() {
@@ -44,33 +83,8 @@ public class FacilityServiceImpl implements FacilityService {
 	
 	
 	
-//	//year
-//	//filter function for top cards
-//	@Override
-//	public ResponseEntity<List<Facility>> getFilteredCards(String year, String facility, String customer){
-//				
-//		Query query = new Query();
-//		
-//		List<Criteria> criteria = new ArrayList<>();
-//		
-//		if(year != null) {
-//			criteria.add(Criteria.where("facility_id").is(facility.getFacilityId()));
-//		}
-//		if(facility != null) {
-//			criteria.add(Criteria.where("address_line_1").is(facility.getAddressLine1()));
-//		}
-//		if(customer != null) {
-//			criteria.add(Criteria.where("address_line_2").is(facility.getAddressLine2()));
-//		}
-//		query.addCriteria(new Criteria().andOperator(criteria.toArray(new Criteria[criteria.size()])));//this is working fine
-//		
-//		
-//		
-//		List<Facility> filteredVals = mongoOperations.find(query, Facility.class);
-//		
-//		return new ResponseEntity<List<Facility>>(filteredVals, new HttpHeaders(), HttpStatus.OK);
-//	}
-	
+
+
 	//get facility filter
 	@Override
 	public ResponseEntity<List<Facility>> getAllFacilityFilter(Facility facility, int page, int size, String sort){
